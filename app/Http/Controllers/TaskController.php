@@ -71,9 +71,13 @@ class TaskController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Task $task)
     {
-        //
+        $validation = $this->validateTaskData();
+
+        $task->update($validation);
+
+        return view('welcome', compact('task'));
     }
 
     /**

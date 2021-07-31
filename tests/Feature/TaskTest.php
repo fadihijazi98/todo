@@ -40,7 +40,7 @@ class TaskTest extends TestCase
     /** @test */
     public function a_user_can_create_new_task()
     {
-        $task = $this->handleResponseRequest('/task', 'post', $this->task, 'task');
+        $task = $this->insertNewTask();
 
         $this->assertEquals($this->task['title'], $task->title);
 
@@ -50,7 +50,13 @@ class TaskTest extends TestCase
     /** @test */
     public function a_user_can_delete_his_task()
     {
+        $task = $this->insertNewTask();
 
+        $titleUpdated = $this->task['title'] = 'foo update';
+
+        $taskUpdated = $this->updateATask($task->id);
+
+        $this->assertEquals($titleUpdated, $taskUpdated->title);
     }
 
     /** @test */
@@ -63,5 +69,15 @@ class TaskTest extends TestCase
     public function a_user_can_get_back_the_status_of_his_task_to_pending()
     {
         # code...
+    }
+
+    private function insertNewTask()
+    {
+        return $this->handleResponseRequest('/task', 'post', $this->task, 'task');
+    }
+
+    private function updateATask($id)
+    {
+        return $this->handleResponseRequest('/task/' . $id, 'put', $this->task, 'task');
     }
 }

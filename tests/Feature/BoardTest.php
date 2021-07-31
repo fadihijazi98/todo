@@ -54,13 +54,13 @@ class BoardTest extends TestCase
         $board = $this->insertNewBoard();
 
         $this->board['name'] = 'name updated';
-        $share_board_id_should_not_updated = $board->share_board_id;
+        $shareBoardIdShouldNotUpdated = $board->share_board_id;
 
         $boardUpdated = $this->updateABoard($board->id);
 
         $this->assertEquals('name updated', $boardUpdated->name);
 
-        $this->assertEquals($share_board_id_should_not_updated, $boardUpdated->share_board_id);
+        $this->assertEquals($shareBoardIdShouldNotUpdated, $boardUpdated->share_board_id);
     }
 
     /** @test */
