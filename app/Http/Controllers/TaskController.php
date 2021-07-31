@@ -86,9 +86,35 @@ class TaskController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Task $task)
     {
-        //
+        $task->delete();
+
+        return redirect('/task');
+    }
+
+    protected function markTaskAsCompleted(Task $task)
+    {
+        $task->update([
+            'status' => 'completed'
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'task' => $task
+        ]);
+    }
+
+    protected function markTaskAsPending(Task $task)
+    {
+        $task->update([
+            'status' => 'pending'
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'task' => $task
+        ]);
     }
 
     private function validateTaskData()
@@ -100,12 +126,12 @@ class TaskController extends Controller
             'board_id' => 'required|exists:boards,id'
         ];
 
-        if(\request('description'))
+        if (\request('description'))
             $validation['description'] = 'required|string';
-        if(\request('due_time'))
+        if (\request('due_time'))
             $validation['due_time'] = 'required|date';
 
-       return \request()->validate(
+        return \request()->validate(
             $validation
         );
     }

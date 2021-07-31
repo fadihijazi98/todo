@@ -48,7 +48,7 @@ class TaskTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_delete_his_task()
+    public function a_user_can_update_his_task()
     {
         $task = $this->insertNewTask();
 
@@ -60,15 +60,33 @@ class TaskTest extends TestCase
     }
 
     /** @test */
+    public function a_user_can_delete_his_task()
+    {
+        $task = $this->insertNewTask();
+
+        $this->deleteATask($task->id)->assertStatus(302);
+    }
+
+    /** @test */
     public function a_user_can_mark_his_task_as_completed()
     {
-        # code...
+        $task = $this->insertNewTask();
+
+        $request = $this->sendRequest('/task/'.$task->id.'/completed', 'put', [], 'task');
+
+        $request->assertOk();
     }
 
     /** @test */
     public function a_user_can_get_back_the_status_of_his_task_to_pending()
     {
-        # code...
+        $task = $this->insertNewTask();
+
+        $request = $this->sendRequest('/task/'.$task->id.'/completed', 'put', [], 'task');
+        $request->assertOk();
+
+        $request = $this->sendRequest('/task/'.$task->id.'/pending', 'put', [], 'task');
+        $request->assertOk();
     }
 
     private function insertNewTask()
@@ -79,5 +97,10 @@ class TaskTest extends TestCase
     private function updateATask($id)
     {
         return $this->handleResponseRequest('/task/' . $id, 'put', $this->task, 'task');
+    }
+
+    private function deleteATask($id)
+    {
+        return $this->sendRequest('/task/'.$id, 'delete', []);
     }
 }
