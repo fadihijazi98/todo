@@ -76,7 +76,7 @@ class BoardController extends Controller
     {
         $validated = $this->validateBoardData(false);
 
-        if ($board->user_id == Auth::id())
+        if ($this->isTheOwnerOfBoard($board))
             $board->update($validated);
 
         return view('welcome', compact('board'));
@@ -88,9 +88,12 @@ class BoardController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Board $board)
     {
-        //
+        if ($this->isTheOwnerOfBoard($board))
+            $board->delete();
+
+        return redirect('/board');
     }
 
     private function validateBoardData($is_in_create_mode = true)
@@ -107,5 +110,10 @@ class BoardController extends Controller
             $validated['share_board_id'] = $share_id;
 
         return $validated;
+    }
+
+    private function isTheOwnerOfBoard(Board $board)
+    {
+        return $board->user_id == Auth::id();
     }
 }

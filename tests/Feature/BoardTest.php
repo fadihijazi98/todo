@@ -64,6 +64,16 @@ class BoardTest extends TestCase
     }
 
     /** @test */
+    public function a_user_can_delete_his_board()
+    {
+        $board = $this->insertNewBoard();
+
+        $request = $this->deleteABoard($board->id);
+
+        $request->assertStatus(302);
+    }
+
+    /** @test */
     public function a_validation_must_failed_when_the_name_is_not_present()
     {
         $this->board['name'] = '';
@@ -113,4 +123,8 @@ class BoardTest extends TestCase
         return $this->handleResponseRequest(('/board/' . $id), 'put', $this->board, 'board');
     }
 
+    private function deleteABoard($id)
+    {
+        return $this->sendRequest('/board/' . $id, 'delete', []);
+    }
 }
