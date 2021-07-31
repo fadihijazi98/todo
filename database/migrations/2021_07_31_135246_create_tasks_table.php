@@ -17,12 +17,12 @@ class CreateTasksTable extends Migration
             $table->id();
 
             $table->string('title');
-            $table->string('description');
+            $table->string('description')->nullable();
 
             $table->enum('priority', ['high', 'mid', 'low']);
             $table->enum('status', ['completed', 'pending']);
 
-            $table->dateTime('due_time');
+            $table->dateTime('due_time')->nullable();
 
             $table->unsignedBigInteger('board_id');
 

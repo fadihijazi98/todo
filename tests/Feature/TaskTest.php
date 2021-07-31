@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Models\Color;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -10,7 +12,7 @@ class TaskTest extends TestCase
 {
     use WithFaker, RefreshDatabase;
 
-    private $task, $user;
+    private $task, $board, $user;
 
     protected function setUp(): void
     {
@@ -20,27 +22,29 @@ class TaskTest extends TestCase
 
         $this->user = $this->signIn();
 
+        $this->board = $this->handleResponseRequest('/board', 'post', [
+            'name' => "fake board",
+            'user_id' => $this->user->id,
+            'color_id' => Color::first()->id
+        ], 'board');
+
         $this->task = [
             'title' => 'foo',
             'description' => 'lorem ipsum ...',
             'priority' => 'high',
-            'due_time' => time() + 10000,
-            'status' => 'pending'
+            'status' => 'pending',
+            'board_id' => $this->board->id
         ];
     }
 
     /** @test */
     public function a_user_can_create_new_task()
     {
-        $task = $this->handleResponseRequest('/task', 'post', $this->task, 'tasks');
+        $task = $this->handleResponseRequest('/task', 'post', $this->task, 'task');
 
-        $this->assertEquals($this->task['title'], $task);
-    }
+        $this->assertEquals($this->task['title'], $task->title);
 
-    /** @test */
-    public function a_user_can_update_his_task()
-    {
-        # code...
+        $this->assertEquals($this->board->name, $task->board->name);
     }
 
     /** @test */
