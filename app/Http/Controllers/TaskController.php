@@ -34,7 +34,7 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd('im here. 1 2 3');
     }
 
     /**

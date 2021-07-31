@@ -18,3 +18,4 @@ Route::get('/', function () {
 });
 
 Route::resource('board', \App\Http\Controllers\BoardController::class);
+Route::resource('task', \App\Http\Controllers\TaskController::class);
