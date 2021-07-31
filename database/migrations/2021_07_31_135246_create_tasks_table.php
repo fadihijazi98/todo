@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNewTasksTable extends Migration
+class CreateTasksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateNewTasksTable extends Migration
      */
     public function up()
     {
-        Schema::create('new_tasks', function (Blueprint $table) {
+        Schema::create('tasks', function (Blueprint $table) {
             $table->id();
 
             $table->string('title');
@@ -25,7 +25,7 @@ class CreateNewTasksTable extends Migration
             $table->dateTime('due_time');
 
             $table->unsignedBigInteger('board_id');
-                        
+
             $table->timestamps();
         });
     }
