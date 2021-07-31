@@ -76,7 +76,8 @@ class BoardController extends Controller
     {
         $validated = $this->validateBoardData(false);
 
-        $board->update($validated);
+        if ($board->user_id == Auth::id())
+            $board->update($validated);
 
         return view('welcome', compact('board'));
     }
