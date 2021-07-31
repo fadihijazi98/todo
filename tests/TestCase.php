@@ -18,12 +18,24 @@ abstract class TestCase extends BaseTestCase
         return $user;
     }
 
-    public function handleRequest($endpoint, $method, $data, $response_key)
+    protected function handleResponseRequest($endpoint, $method, $data, $response_key)
     {
-        $request = $this->$method($endpoint, $data);
+        $request = $this->sendRequest($endpoint, $method, $data);
 
         $request->assertOk();
 
-        return $request->getOriginalContent()->getData()[$response_key];
+        return $this->getResponse($request, $response_key);
+    }
+
+    protected function sendRequest($endpoint, $method, $data)
+    {
+        $request = $this->$method($endpoint, $data);
+
+        return $request;
+    }
+
+    protected function getResponse($request, $response_key)
+    {
+        return ($request->getOriginalContent()->getData()[$response_key] ?? null);
     }
 }
