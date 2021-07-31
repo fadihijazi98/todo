@@ -72,9 +72,13 @@ class BoardController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Board $board)
     {
-        //
+        $validated = $this->validateBoardData(false);
+
+        $board->update($validated);
+
+        return view('welcome', compact('board'));
     }
 
     /**
