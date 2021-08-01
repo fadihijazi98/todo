@@ -25,11 +25,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $board = Auth::user()->boards;
+        $boards = Auth::user()->boards()->paginate(6);
 
         $pending_tasks = Task::where('status', 'pending')->count();
         $completed_tasks = Task::where('status', 'completed')->count();
 
-        return view('home', compact(['board', 'pending_tasks', 'completed_tasks']));
+        return view('home', compact(['boards', 'pending_tasks', 'completed_tasks']));
     }
 }

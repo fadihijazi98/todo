@@ -93,7 +93,7 @@ class BoardController extends Controller
         if ($this->isTheOwnerOfBoard($board))
             $board->delete();
 
-        return redirect('/board');
+        return back();
     }
 
     public function search()
