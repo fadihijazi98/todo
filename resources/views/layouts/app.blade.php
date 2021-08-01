@@ -38,7 +38,7 @@
                             <div class="hidden md:block font-Righteous">
                                 <div class="ml-10 flex items-baseline space-x-4">
                                     <!-- Current: "bg-purple-900 text-white", Default: "text-purple-300 hover:bg-purple-700 hover:text-white" -->
-                                    <a href="#"
+                                    <a href="{{route('board.index')}}"
                                        class="bg-purple-900 text-white px-3 py-2 rounded-md text-sm font-medium">Boards</a>
 
                                     <a href="#"
@@ -122,7 +122,7 @@
                 @auth()
                     <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 font-Righteous">
                         <!-- Current: "bg-purple-900 text-white", Default: "text-purple-300 hover:bg-purple-700 hover:text-white" -->
-                        <a href="#"
+                        <a href="{{route('board.index')}}"
                            class="bg-purple-900 text-white block px-3 py-2 rounded-md text-base font-medium">Boards</a>
 
                         <a href="#"
