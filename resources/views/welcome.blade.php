@@ -42,22 +42,60 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="bg-notehub-red text-white p-3 rounded-sm click:bg-red-600">
+                <a href="{{route('login')}}" class="bg-notehub-red text-white p-3 rounded-sm click:bg-red-600">
                     login
                 </a>
             </li>
         </ul>
 
-        <div class="sm:hidden flex flex-1 justify-end">
-            <button class="mx-7">
+        <div class="sm:hidden flex flex-1 justify-end" onclick="">
+            <button class="mx-7" onclick="openMenuDrawer()">
                 <svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="bars" role="img"
                      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-5 text-notehub-red">
                     <path fill="currentColor"
                           d="M442 114H6a6 6 0 0 1-6-6V84a6 6 0 0 1 6-6h436a6 6 0 0 1 6 6v24a6 6 0 0 1-6 6zm0 160H6a6 6 0 0 1-6-6v-24a6 6 0 0 1 6-6h436a6 6 0 0 1 6 6v24a6 6 0 0 1-6 6zm0 160H6a6 6 0 0 1-6-6v-24a6 6 0 0 1 6-6h436a6 6 0 0 1 6 6v24a6 6 0 0 1-6 6z"
                           class=""></path>
                 </svg>
-
             </button>
+        </div>
+
+        <!-- drawer -->
+        <div id="menu" class="hidden">
+            <div class="fixed z-40 inset-0 bg-purple-800 opacity-90 flex justify-center items-center">
+                <div class="absolute text-white right-32 top-32">
+                   <button class="w-16 h-16 bg-purple-900 flex items-center justify-center rounded-full" onclick="closeMenuDrawer()">
+                       <svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="times" role="img"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"
+                            class="w-4">
+                           <path fill="currentColor"
+                                 d="M193.94 256L296.5 153.44l21.15-21.15c3.12-3.12 3.12-8.19 0-11.31l-22.63-22.63c-3.12-3.12-8.19-3.12-11.31 0L160 222.06 36.29 98.34c-3.12-3.12-8.19-3.12-11.31 0L2.34 120.97c-3.12 3.12-3.12 8.19 0 11.31L126.06 256 2.34 379.71c-3.12 3.12-3.12 8.19 0 11.31l22.63 22.63c3.12 3.12 8.19 3.12 11.31 0L160 289.94 262.56 392.5l21.15 21.15c3.12 3.12 8.19 3.12 11.31 0l22.63-22.63c3.12-3.12 3.12-8.19 0-11.31L193.94 256z"
+                                 class=""></path>
+                       </svg>
+                   </button>
+                </div>
+
+                <div class="relative">
+                    <ul class="text-4xl text-white space-y-7">
+                        <li>
+                            <a href="#" class="hover:text-purple-300" onclick="closeMenuDrawer()">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#feature" class="hover:text-purple-300" onclick="closeMenuDrawer()">
+                                Feature
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{route('login')}}"
+                               class="bg-purple-100 p-2 rounded-sm text-purple-800 inline-block mt-5 hover:text-purple-700">
+                                LOGIN
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </nav>
 </header>
@@ -69,21 +107,24 @@
         <!-- Content -->
         <div class="flex flex-1 flex-col items-center lg:items-start">
             <h2 class="text-notehub-blue text-3xl md:text-4 lg:text-5xl text-center lg:text-left mb-6">
-                A Simple TODO Manager
+                A Simple TODO App
             </h2>
             <p class="text-notehub-grey text-lg text-center lg:text-left mb-6">
                 A clean and simple interface to organize your tasks. Open a new browser tab and see your sites
                 load instantly. Try it for free.
             </p>
             <div class="flex justify-center flex-wrap gap-6">
-                <button type="button" class="btn btn-purple hover:bg-notehub-white hover:text-black">
-                    Sign-up now !
-                </button>
+                <a href="{{route('register')}}">
+                    <button type="button" class="btn btn-purple hover:bg-notehub-white hover:text-black">
+                        Sign-up now !
+                    </button>
+                </a>
             </div>
         </div>
         <!-- Image -->
         <div class="flex justify-center flex-1 mb-10 md:mb-16 lg:mb-0 z-10">
-            <img class="w-5/6 h-5/6 sm:w-3/4 sm:h-3/4 md:w-full md:h-full" src="{{ asset('images/hero-bg.png') }}" alt=""/>
+            <img class="w-5/6 h-5/6 sm:w-3/4 sm:h-3/4 md:w-full md:h-full" src="{{ asset('images/hero-bg.png') }}"
+                 alt=""/>
         </div>
     </div>
     <!-- Rounded Rectangle -->
@@ -228,4 +269,17 @@
 </section>
 
 </body>
+
+<script defer>
+    function openMenuDrawer()
+    {
+        document.getElementById('menu').style.display = "block";
+    }
+
+    function closeMenuDrawer()
+    {
+        document.getElementById('menu').style.display = "none";
+    }
+</script>
+
 </html>
