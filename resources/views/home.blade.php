@@ -10,14 +10,22 @@
                 {{ explode(' ', \Illuminate\Support\Facades\Auth::user()->name)[0] }} !
                 </span>
                 <br/>
-                You have 25 tasks completed this day.
+                You have
+                <span class="font-Righteous tracking-widest">
+                    {{ $completed_tasks }}
+                </span>
+                tasks completed this day.
             </div>
             <div class="bg-purple-800 text-white p-16 rounded-sm font-bold sm:m-0 mt-2">
                 <span
                     class="tracking-widest font-extrabold inline-block px-4 p-2 bg-purple-900 rounded-sm mr-1 font-Righteous">
                 {{ explode(' ', \Illuminate\Support\Facades\Auth::user()->name)[0] }}
                 </span>
-                You have 25 tasks pending (todo).
+                You have
+                <span class="font-Righteous tracking-widest">
+                    {{ $pending_tasks }}
+                </span>
+                tasks pending (todo).
             </div>
         </div>
 
