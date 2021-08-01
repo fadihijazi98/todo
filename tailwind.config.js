@@ -14,6 +14,7 @@ module.exports = {
         fontFamily: {
             Merienda: ["Merienda"],
             Righteous: ["Righteous"],
+            Gowun: ["Gowun Dodum"]
         },
         container: {
             center: true,

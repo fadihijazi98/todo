@@ -96,6 +96,16 @@ class BoardController extends Controller
         return redirect('/board');
     }
 
+    public function search()
+    {
+        $result = [];
+
+        if ($keyword = \request('keyword'))
+            $result = Board::where('name', 'regexp', $keyword)->get()->values();
+
+        return response()->json($result);
+    }
+
     private function validateBoardData($is_in_create_mode = true)
     {
         $share_id = uniqid();
@@ -116,4 +126,5 @@ class BoardController extends Controller
     {
         return $board->user_id == Auth::id();
     }
+
 }

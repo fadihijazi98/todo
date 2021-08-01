@@ -15,6 +15,7 @@
     <!-- fonts.google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@700&family=Righteous&display=swap"
           rel="stylesheet">
 
@@ -22,7 +23,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-<div id="app" class="font-Righteous">
+<div id="app" class="font-Gowun font-bold">
     <div>
         <nav class="bg-purple-800">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,7 +35,7 @@
                             </a>
                         </div>
                         @auth()
-                            <div class="hidden md:block">
+                            <div class="hidden md:block font-Righteous">
                                 <div class="ml-10 flex items-baseline space-x-4">
                                     <!-- Current: "bg-purple-900 text-white", Default: "text-purple-300 hover:bg-purple-700 hover:text-white" -->
                                     <a href="#"
@@ -47,9 +48,6 @@
                                        class="text-purple-300 hover:bg-purple-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Completed
                                         tasks</a>
 
-                                    <a href="#"
-                                       class="text-purple-300 hover:bg-purple-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Pending
-                                        tasks</a>
                                 </div>
                             </div>
                         @endauth
@@ -61,8 +59,8 @@
                                 @auth
 
                                     <div class="flex gap-2 items-center">
-                                        <div class="text-white lowercase text-xs">
-                                            {{ Auth::user()->name }}
+                                        <div class="text-white text-xs font-Righteous tracking-widest">
+                                            {{ ucfirst(explode(' ', Auth::user()->name)[0]) }}
                                         </div>
                                         <button @click="toggleImageMenu" type="button"
                                                 class="max-w-xs bg-purple-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-purple-800 focus:ring-white"
@@ -90,7 +88,7 @@
                                     <form action="{{route('logout')}}" method="post">
                                         @csrf
                                         <button type="submit"
-                                                class="block px-4 py-2 text-sm text-purple-700 uppercase"
+                                                class="block px-4 py-2 text-sm text-purple-700 uppercase font-Righteous"
                                                 role="menuitem" tabindex="-1" id="user-menu-item-2">sign out
                                         </button>
                                     </form>
@@ -122,7 +120,7 @@
             <div class="md:hidden" id="mobile-menu" v-if="menuInSmallScreenVisibility">
 
                 @auth()
-                    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 font-Righteous">
                         <!-- Current: "bg-purple-900 text-white", Default: "text-purple-300 hover:bg-purple-700 hover:text-white" -->
                         <a href="#"
                            class="bg-purple-900 text-white block px-3 py-2 rounded-md text-base font-medium">Boards</a>
@@ -134,9 +132,6 @@
                            class="text-purple-300 hover:bg-purple-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Completed
                             tasks</a>
 
-                        <a href="#"
-                           class="text-purple-300 hover:bg-purple-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Pending
-                            tasks</a>
                     </div>
                 @endauth
 
@@ -149,7 +144,9 @@
                                      alt="user avatar">
                             </div>
                             <div class="ml-3">
-                                <div class="text-base font-medium leading-none text-white">{{Auth::user()->name}}</div>
+                                <div class="text-base font-medium leading-none text- tracking-widest text-white">
+                                    {{ ucfirst(explode(' ', Auth::user()->name)[0]) }}
+                                </div>
                                 <div class="text-sm font-medium leading-none text-purple-400">{{Auth::user()->email}}</div>
                             </div>
                         </div>
@@ -157,7 +154,7 @@
                             <form action="{{route('logout')}}" method="post">
                                 @csrf
                                 <button type="submit"
-                                        class="block px-3 py-2 rounded-md text-base font-medium text-purple-400 hover:text-white hover:bg-purple-700 uppercase"
+                                        class="block font-Righteous px-3 py-2 rounded-md text-base font-medium text-purple-400 hover:text-white hover:bg-purple-700 uppercase"
                                         role="menuitem" tabindex="-1" id="user-menu-item-2">sign out
                                 </button>
                             </form>
@@ -180,9 +177,9 @@
             </div>
         </nav>
 
-        <header class="bg-white border-b border-purple-800 shadow">
+        <header class="bg-purple-900 border-b border-purple-800 shadow">
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                <h1 class="text-3xl font-bold text-purple-900 font-Merienda">
+                <h1 class="text-3xl font-bold text-white font-Merienda">
                     Boards
                 </h1>
             </div>
