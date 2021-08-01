@@ -147,7 +147,8 @@
                                 <div class="text-base font-medium leading-none text- tracking-widest text-white">
                                     {{ ucfirst(explode(' ', Auth::user()->name)[0]) }}
                                 </div>
-                                <div class="text-sm font-medium leading-none text-purple-400">{{Auth::user()->email}}</div>
+                                <div
+                                    class="text-sm font-medium leading-none text-purple-400">{{Auth::user()->email}}</div>
                             </div>
                         </div>
                         <div class="mt-3 px-2 space-y-1">
@@ -179,9 +180,15 @@
 
         <header class="bg-purple-900 border-b border-purple-800 shadow">
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                <h1 class="text-3xl font-bold text-white font-Merienda">
-                    Boards
-                </h1>
+                @auth()
+                    <h1 class="text-3xl font-bold text-white font-Merienda">
+                        @yield('path', $path??'Boards')
+                    </h1>
+                @else
+                    <h3 class="text-xl font-bold text-white font-Merienda">
+                        Join us and login or get your free account now !
+                    </h3>
+                @endauth
             </div>
         </header>
 

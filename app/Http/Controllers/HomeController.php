@@ -25,7 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $boards = Auth::user()->boards()->paginate(6);
+        $boards = Auth::user()->boards()->orderBy('created_at', 'DESC')->paginate(6);
 
         $pending_tasks = Task::where('status', 'pending')->count();
         $completed_tasks = Task::where('status', 'completed')->count();

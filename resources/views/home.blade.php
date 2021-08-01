@@ -31,7 +31,10 @@
 
         <div class="mt-8">
             <h1 class="text-purple-800 text-xl">
-                # Your Task Boards
+                # Your Boards, or
+                <a href="/board/create" class="text-purple-500 underline">
+                    create new board
+                </a>
             </h1>
             <div>
                 <search-bar endpoint='/board/search' csrf="{{csrf_token()}}"/>
@@ -46,7 +49,8 @@
                             <form action="{{ route('board.destroy', $board) }}" method="post">
                                 @csrf
                                 @method('delete')
-                                <button class="bg-notehub-white w-10 h-10 rounded-full flex items-center justify-center">
+                                <button
+                                    class="bg-notehub-white w-10 h-10 rounded-full flex items-center justify-center">
                                     <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash"
                                          role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
                                          class="text-notehub-red w-4">
@@ -59,6 +63,17 @@
                         </div>
                         <div class="text-notehub-grey">
                             {{$board->description}}
+                        </div>
+                        <div class="mt-1 text-purple-900">
+                            <div style="{{'color: '. $board->color->code}}">
+                                Color:
+                                <span class="inline-block w-4 h-4 rounded-full"
+                                      style="{{'background-color: '. $board->color->code}}">
+                                </span>
+                            </div>
+                            <div>
+                                {{ $board->created_at->diffForHumans()}}
+                            </div>
                         </div>
                         <div class="mt-8 flex flex-col sm:flex-row gap-2">
                             <div class="bg-purple-900 px-4 p-1 rounded-sm text-white">

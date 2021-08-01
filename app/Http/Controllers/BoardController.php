@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Board;
+use App\Models\Color;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +16,7 @@ class BoardController extends Controller
      */
     public function index()
     {
-        //
+        return redirect('/home');
     }
 
     /**
@@ -25,7 +26,10 @@ class BoardController extends Controller
      */
     public function create()
     {
-        //
+        $path = 'Board - create';
+        $colors = Color::all();
+
+        return view('board.create', compact(['path', 'colors']));
     }
 
     /**
@@ -40,7 +44,7 @@ class BoardController extends Controller
 
         $board = Board::create($validated);
 
-        return view('welcome', compact('board'));
+        return redirect('/home');
     }
 
     /**
@@ -115,6 +119,9 @@ class BoardController extends Controller
             'user_id' => 'required|integer|exists:users,id',
             'color_id' => 'required|integer|exists:colors,id'
         ]);
+
+        if (\request()->has('description'))
+            $validated['description'] = \request('description');
 
         if ($is_in_create_mode)
             $validated['share_board_id'] = $share_id;
