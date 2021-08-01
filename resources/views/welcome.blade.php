@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>todo</title>
+    <title>{{ config('app.name', 'Laravel') . ', welcome' }}</title>
 
     <!-- fonts.google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
