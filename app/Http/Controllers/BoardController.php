@@ -53,9 +53,12 @@ class BoardController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Board $board)
     {
-        //
+        $path = "Board, Edit";
+        $colors = Color::all();
+
+        return view('board.edit', compact(['board', 'colors', 'path']));
     }
 
     /**
