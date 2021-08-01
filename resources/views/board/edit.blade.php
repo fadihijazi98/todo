@@ -3,8 +3,9 @@
 @section('content')
     <div class="container">
         <div class="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-            <form action="{{route('board.store')}}" method="post" class="mt-8 space-y-6">
+            <form action="{{route('board.update', $board)}}" method="post" class="mt-8 space-y-6">
                 @csrf
+                @method('put')
 
                 <input name="user_id" value="{{Auth::id()}}" hidden>
 

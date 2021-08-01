@@ -86,7 +86,7 @@ class BoardController extends Controller
         if ($this->isTheOwnerOfBoard($board))
             $board->update($validated);
 
-        return view('welcome', compact('board'));
+        return redirect('/board');
     }
 
     /**

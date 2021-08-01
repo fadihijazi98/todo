@@ -39,7 +39,7 @@
             <div>
                 <search-bar endpoint='/board/search' csrf="{{csrf_token()}}"/>
             </div>
-            <div class="mt-8 grid grid-cols-2 gap-8">
+            <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-8">
                 @foreach($boards as $board)
                     <div class="bg-white my-4 p-6 rounded-sm">
                         <div class="flex justify-between items-center">
@@ -75,7 +75,7 @@
                                 {{ $board->created_at->diffForHumans()}}
                             </div>
                         </div>
-                        <div class="mt-8 flex flex-col sm:flex-row gap-2">
+                        <div class="mt-8 flex flex-col md:flex-row gap-2">
                             <div class="bg-purple-900 px-4 p-1 rounded-sm text-white">
                                 {{ $board->count_tasks }} tasks
                             </div>
