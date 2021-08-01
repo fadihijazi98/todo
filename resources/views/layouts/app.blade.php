@@ -23,7 +23,6 @@
 </head>
 <body>
 <div id="app" class="font-Righteous">
-    <!-- This example requires Tailwind CSS v2.0+ -->
     <div>
         <nav class="bg-purple-800">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -61,13 +60,16 @@
                             <div class="ml-3 relative">
                                 @auth
 
-                                    <div>
+                                    <div class="flex gap-2 items-center">
+                                        <div class="text-white lowercase text-xs">
+                                            {{ Auth::user()->name }}
+                                        </div>
                                         <button @click="toggleImageMenu" type="button"
                                                 class="max-w-xs bg-purple-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-purple-800 focus:ring-white"
                                                 id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                                             <img class="h-8 w-8 rounded-full"
-                                                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                                 alt="user avatar image">
+                                                 src="{{asset('images/user.png')}}"
+                                                 alt="user avatar">
                                         </button>
                                     </div>
                                 @else
@@ -143,12 +145,12 @@
                         <div class="flex items-center px-5">
                             <div class="flex-shrink-0">
                                 <img class="h-10 w-10 rounded-full"
-                                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                     alt="">
+                                     src="{{asset('images/user.png')}}"
+                                     alt="user avatar">
                             </div>
                             <div class="ml-3">
-                                <div class="text-base font-medium leading-none text-white">user</div>
-                                <div class="text-sm font-medium leading-none text-purple-400">user@example.com</div>
+                                <div class="text-base font-medium leading-none text-white">{{Auth::user()->name}}</div>
+                                <div class="text-sm font-medium leading-none text-purple-400">{{Auth::user()->email}}</div>
                             </div>
                         </div>
                         <div class="mt-3 px-2 space-y-1">
@@ -178,7 +180,7 @@
             </div>
         </nav>
 
-        <header class="bg-white shadow">
+        <header class="bg-white border-b border-purple-800 shadow">
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                 <h1 class="text-3xl font-bold text-purple-900 font-Merienda">
                     Boards
@@ -186,15 +188,13 @@
             </div>
         </header>
 
-        <main>
+        <main class="bg-notehub-white h-screen">
             <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-                <!-- Replace with your content -->
                 <div class="px-4 py-6 sm:px-0">
                     <main class="py-4">
                         @yield('content')
                     </main>
                 </div>
-                <!-- /End replace -->
             </div>
         </main>
     </div>
