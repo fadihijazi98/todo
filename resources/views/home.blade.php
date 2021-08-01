@@ -62,13 +62,13 @@
                         </div>
                         <div class="mt-8 flex flex-col sm:flex-row gap-2">
                             <div class="bg-purple-900 px-4 p-1 rounded-sm text-white">
-                                3 tasks
+                                {{ $board->count_tasks }} tasks
                             </div>
                             <div class="bg-green-500 mx-4 px-4 p-1 rounded-sm text-white">
-                                2 completed
+                                {{ $board->count_completed_tasks }} completed
                             </div>
                             <div class="bg-red-500 px-4 p-1 rounded-sm text-white">
-                                3 pending
+                                {{ $board->count_pending_tasks }} pending
                             </div>
 
                         </div>
