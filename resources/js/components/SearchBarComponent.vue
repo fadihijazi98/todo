@@ -1,8 +1,8 @@
 <template>
     <div class="my-8">
         <div>
-            <div class="inline-block">
-                <div class="relative ">
+            <div class="relative inline-block">
+                <div class="relative">
                     <input placeholder="type key to search"
                            v-model="keyword"
                            class="appearance-none rounded-none relative px-6 py-2 bg-gray-100
@@ -18,7 +18,7 @@
                         </svg>
                     </div>
                 </div>
-                <div class="bg-purple-800 text-white mt-1 rounded-b-md">
+                <div class="bg-purple-800 text-white mt-1 rounded-b-md absolute left-0 right-0">
                     <div class="hover:bg-purple-900 px-4 p-2" v-for="item in result">
                         <a :href="`/board/${item.id}`" target="_blank">
                             {{ item.name }}
