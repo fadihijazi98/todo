@@ -22,3 +22,11 @@ Route::resource('board', \App\Http\Controllers\BoardController::class);
 Route::resource('task', \App\Http\Controllers\TaskController::class);
 Route::put('/task/{task}/completed', [\App\Http\Controllers\TaskController::class, 'markTaskAsCompleted']);
 Route::put('/task/{task}/pending', [\App\Http\Controllers\TaskController::class, 'markTaskAsPending']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
