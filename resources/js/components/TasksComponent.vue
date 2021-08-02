@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="">
-            <div class="flex flex-col sm:flex-row justify-center">
+            <div class="flex flex-col sm:flex-row justify-center" v-if="!in_share_mode">
                 <textarea
                     v-model="current_task"
                     class="min-w-max appearance-none rounded-none relative block w-full px-3 py-2 font-Merienda
@@ -40,9 +40,11 @@ description">
                     <SearchBarComponent endpoint="/task/search" key_path="task" :csrf="csrf"/>
                     <div v-if="board">
                         <input id="share_board_link"
+                               v-if="!in_share_mode"
                                :value="`http://127.0.0.1:8000/board/share/${board.share_board_id}`"
                                class="absolute z-0 opacity-0">
                         <button
+                            v-if="!in_share_mode"
                             @click="copyShareBoardLink()"
                             class="relative z-10 btn font-Righteous tracking-wide uppercase btn-purple flex items-center gap-4">
                             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="share-alt" role="img"
@@ -69,7 +71,7 @@ description">
                         <div v-for="ct in pending_tasks"
                              class="flex items-center justify-between gap-6 bg-white py-3 px-4 rounded-sm">
                             <div>
-                                <input @click="mark_task_as_completed(ct)" type="checkbox" :key="ct.id"
+                                <input @click="mark_task_as_completed(ct)" type="checkbox" :key="ct.id" v-if="!in_share_mode"
                                        class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"/>
                             </div>
                             <div class="flex items-center gap-2">
@@ -119,7 +121,7 @@ description">
                         <div v-for="ct in completed_tasks"
                              class="flex items-center justify-between gap-6 bg-white py-3 px-4 rounded-sm">
                             <div>
-                                <input @click="mark_task_as_pending(ct)" type="checkbox" checked :key="ct.id"
+                                <input @click="mark_task_as_pending(ct)" type="checkbox" checked :key="ct.id" v-if="!in_share_mode"
                                        class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"/>
                             </div>
 
@@ -201,15 +203,22 @@ export default {
         },
         board: {
             required: false,
+            type: Array,
             default() {
                 return {};
             }
         },
         boards: {
             required: false,
+            type: Array,
             default() {
                 return [];
             }
+        },
+        in_share_mode: {
+            required: false,
+            type: Boolean,
+            default: false
         }
     },
     data() {

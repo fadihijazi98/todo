@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
 @section('content')
     <div class="">
@@ -80,7 +80,7 @@
                 </form>
             </div>
             <div class="flex-1">
-                <tasks-component :tasks="{{$tasks->values()->toJson()}}" :board="{{$board}}" csrf="{{csrf_token()}}" />
+                <tasks-component :tasks="{{$tasks->values()->toJson()}}" :board="{{$board}}" />
             </div>
         </div>
         <div>

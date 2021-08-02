@@ -28,7 +28,9 @@ class BoardController extends Controller
     public function renderShareBoard($shar_id)
     {
         $board = Board::where('share_board_id', $shar_id)->first();
-        dd($board);
+        $tasks = $board->tasks()->paginate(10);
+
+        return view('board.share', compact(['board', 'tasks']));
     }
 
     /**
@@ -67,6 +69,9 @@ class BoardController extends Controller
      */
     public function show(Board $board)
     {
+        if ($board->user->id != Auth::id())
+            return redirect('/home');
+
         $tasks = $board->tasks();
 
         if (\request()->has('sort')) {
