@@ -23,6 +23,7 @@ Route::post('/board/search', [\App\Http\Controllers\BoardController::class, 'sea
 Route::resource('task', \App\Http\Controllers\TaskController::class);
 Route::put('/task/{task}/completed', [\App\Http\Controllers\TaskController::class, 'markTaskAsCompleted']);
 Route::put('/task/{task}/pending', [\App\Http\Controllers\TaskController::class, 'markTaskAsPending']);
+Route::post('/task/search', [\App\Http\Controllers\TaskController::class, 'search']);
 
 Auth::routes();
 

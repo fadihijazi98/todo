@@ -172,7 +172,7 @@
             <div class="flex flex-1 flex-col items-center lg:items-start">
                 <h1 class="text-3xl text-notehub-blue">Todo is a drageable</h1>
                 <p class="text-notehub-grey my-4 text-center lg:text-left sm:w-3/4 lg:w-full">
-                    You can drag your tasks as you want or sort by priorities of tasks.
+                    you can drag your tasks as you want or sort by priorities of tasks.
                 </p>
                 <button type="button" class="btn btn-purple hover:bg-notehub-white hover:text-black">More Info</button>
             </div>
@@ -208,7 +208,7 @@
             <div class="flex flex-1 flex-col items-center lg:items-start">
                 <h1 class="text-3xl text-notehub-blue">Support Search</h1>
                 <p class="text-notehub-grey my-4 text-center lg:text-left sm:w-3/4 lg:w-full">
-                    You can search to your boards or your tasks by typing the name of the ( board / task ).
+                    you can pick your task from collections of tasks or bord from collections of boards by typing in search-bar
                 </p>
                 <button type="button" class="btn btn-purple hover:bg-notehub-white hover:text-black">More Info</button>
             </div>
@@ -244,7 +244,7 @@
             <div class="flex flex-1 flex-col items-center lg:items-start">
                 <h1 class="text-3xl text-notehub-blue">Share your board</h1>
                 <p class="text-notehub-grey my-4 text-center lg:text-left sm:w-3/4 lg:w-full">
-                    Easily share your tasks in board with others. Create a shareable link that you can send at the
+                    Easily share you tasks in board with others. Create a shareable link that you can send at the
                     click of a button.
                 </p>
                 <button type="button" class="btn btn-purple hover:bg-notehub-white hover:text-black">More Info</button>

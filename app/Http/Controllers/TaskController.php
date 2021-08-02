@@ -93,6 +93,18 @@ class TaskController extends Controller
         return redirect('/task');
     }
 
+    public function search()
+    {
+        $result = [];
+
+        if(\request()->has('keyword'))
+            $result = Task::where('title', 'regexp', \request('keyword'))->get()->values();
+
+        return response()->json(
+            $result
+        );
+    }
+
     protected function markTaskAsCompleted(Task $task)
     {
         $task->update([

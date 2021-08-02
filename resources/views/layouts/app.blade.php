@@ -181,11 +181,11 @@
         <header class="bg-purple-900 border-b border-purple-800 shadow">
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                 @auth()
-                    <h1 class="text-3xl font-bold text-white font-Merienda">
+                    <h1 class="text-md font-bold text-white font-Merienda">
                         @yield('path', $path??'Boards')
                     </h1>
                 @else
-                    <h3 class="text-xl font-bold text-white font-Merienda">
+                    <h3 class="text-md font-bold text-white font-Merienda">
                         Join us and login or get your free account now !
                     </h3>
                 @endauth

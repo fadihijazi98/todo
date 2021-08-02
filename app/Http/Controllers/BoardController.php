@@ -55,7 +55,7 @@ class BoardController extends Controller
      */
     public function show(Board $board)
     {
-        $path = "Board, Edit";
+        $path = "Board, Edit | Tasks";
         $colors = Color::all();
 
         return view('board.edit', compact(['board', 'colors', 'path']));

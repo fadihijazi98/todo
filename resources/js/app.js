@@ -21,6 +21,7 @@ window.Vue = require('vue').default;
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('search-bar', require('./components/SearchBarComponent').default);
+Vue.component('tasks-component', require('./components/TasksComponent').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

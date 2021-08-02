@@ -20,8 +20,9 @@
                 </div>
                 <div class="bg-purple-800 text-white mt-1 rounded-b-md absolute left-0 right-0">
                     <div class="hover:bg-purple-900 px-4 p-2" v-for="item in result">
-                        <a :href="`/board/${item.id}`" target="_blank">
-                            {{ item.name }}
+                        <a :href="`/${key_path}/${item.id}`" target="_blank">
+                            <span v-if="item.name" v-text="item.name"></span>
+                            <span v-else-if="item.title" v-text="item.title"></span>
                         </a>
                     </div>
                 </div>
@@ -41,6 +42,10 @@ export default {
         csrf: {
             type: String,
             default: ''
+        },
+        key_path: {
+            type: String,
+            default: 'board'
         }
     },
     data() {
