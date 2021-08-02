@@ -56,7 +56,7 @@ export default {
     },
     methods: {
         search() {
-            axios.post(this.endpoint, {csrf_token: this.csrf, keyword: this.keyword})
+            axios.post(this.endpoint, {_token: this.csrf, keyword: this.keyword})
                 .then(resp => {
                     this.result = resp.data;
                 })

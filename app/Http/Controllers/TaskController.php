@@ -41,10 +41,9 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        $colors = Color::all();
         $path = "Task";
 
-        return view('task.edit', compact(['task', 'colors', 'path']));
+        return view('task.edit', compact(['task', 'path']));
     }
 
     /**
@@ -71,7 +70,7 @@ class TaskController extends Controller
 
         $task->update($validation);
 
-        return view('welcome', compact('task'));
+        return redirect(route('board.show', $task->board));
     }
 
     /**
@@ -82,16 +81,18 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
+        $board = $task->board;
+
         $task->delete();
 
-        return redirect('/task');
+        return redirect(route('board.show', $board));
     }
 
     public function search()
     {
         $result = [];
 
-        if(\request()->has('keyword'))
+        if (\request()->has('keyword'))
             $result = Task::where('title', 'regexp', \request('keyword'))->get()->values();
 
         return response()->json(
@@ -129,13 +130,14 @@ class TaskController extends Controller
             'title' => 'required|string',
             'priority' => 'required|in:high,mid,low',
             'status' => 'required|in:pending,completed',
-            'board_id' => 'required|exists:boards,id'
         ];
 
         if (\request('description'))
             $validation['description'] = 'required|string';
         if (\request('due_time'))
             $validation['due_time'] = 'required|date';
+        if(\request('board_id'))
+            $validation['board_id'] = 'required|exists:boards,id';
 
         return \request()->validate(
             $validation

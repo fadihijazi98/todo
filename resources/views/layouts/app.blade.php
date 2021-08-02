@@ -37,17 +37,18 @@
                         @auth()
                             <div class="hidden md:block font-Righteous">
                                 <div class="ml-10 flex items-baseline space-x-4">
-                                    <?php
-                                        if(!isset($path) || preg_match('/board/i', $path))
-                                            $path = 'board';
-                                    ?>
-                                    <!-- Current: "bg-purple-900 text-white", Default: "text-purple-300 hover:bg-purple-700 hover:text-white" -->
+                                <?php
+                                if (!isset($path) || preg_match('/board/i', $path))
+                                    $path = 'board';
+                                ?>
+                                <!-- Current: "bg-purple-900 text-white", Default: "text-purple-300 hover:bg-purple-700 hover:text-white" -->
                                     <a href="{{route('board.index')}}"
                                        class="{{strtolower($path)=='board'?'bg-purple-900':''}} text-white px-3 py-2 rounded-md text-sm font-medium">Boards</a>
 
                                     <a href="#"
-                                       class="{{strtolower($path)=='task'?'bg-purple-900':''}} text-purple-300 hover:bg-purple-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Board
-                                        - Tasks</a>
+                                       class="{{strtolower($path)=='task'?'bg-purple-900':''}} text-purple-300 hover:bg-purple-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                                        Task
+                                    </a>
 
                                 </div>
                             </div>
@@ -127,8 +128,9 @@
                            class="bg-purple-900 text-white block px-3 py-2 rounded-md text-base font-medium">Boards</a>
 
                         <a href="#"
-                           class="text-purple-300 hover:bg-purple-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Board
-                            - Tasks</a>
+                           class="text-purple-300 hover:bg-purple-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+                            Task
+                        </a>
 
                     </div>
                 @endauth

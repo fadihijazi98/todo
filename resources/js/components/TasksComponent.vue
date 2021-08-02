@@ -227,7 +227,7 @@ export default {
     methods: {
         storeTaskRequest() {
             axios.post('/task', {
-                csrf_token: this.csrf, title: this.title,
+                _token: this.csrf, title: this.title,
                 description: this.description, status: 'pending',
                 priority: this.priority, board_id: (this.board_id ? this.board_id : this.board.id)
             })
