@@ -21,6 +21,17 @@ class BoardController extends Controller
     }
 
     /**
+     * Display a listing of the request.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function renderShareBoard($shar_id)
+    {
+        $board = Board::where('share_board_id', $shar_id)->first();
+        dd($board);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

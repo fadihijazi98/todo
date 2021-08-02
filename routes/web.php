@@ -19,6 +19,7 @@ Route::get('/', function () {
 
 Route::resource('board', \App\Http\Controllers\BoardController::class);
 Route::post('/board/search', [\App\Http\Controllers\BoardController::class, 'search']);
+Route::get('/board/share/{id}', [\App\Http\Controllers\BoardController::class, 'renderShareBoard']);
 
 Route::resource('task', \App\Http\Controllers\TaskController::class);
 Route::put('/task/{task}/completed', [\App\Http\Controllers\TaskController::class, 'markTaskAsCompleted']);
