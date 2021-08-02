@@ -28,6 +28,7 @@ description">
                     </option>
                 </select>
                 <button
+                    @click="storeTaskRequest()"
                     class="group relative w-20 py-2 px-4 border border-transparent text-sm font-medium
                      rounded-r-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2
                       focus:ring-offset-2 focus:ring-indigo-500 font-Righteous uppercase tracking-widestc">
@@ -35,8 +36,8 @@ description">
                 </button>
             </div>
             <div class="border-t my-8 py-2">
-                <div class="flex flex-col sm:flex-row items-center justify-between">
-                    <SearchBarComponent endpoint="/task/search" key_path="task" />
+                <div class="flex flex-col my-4 sm:my-0 sm:flex-row items-center justify-between">
+                    <SearchBarComponent endpoint="/task/search" key_path="task" :csrf="csrf"/>
                     <div v-if="board">
                         <input id="share_board_link"
                                :value="`http://127.0.0.1:8000/board/share/${board.share_board_id}`"
@@ -57,7 +58,12 @@ description">
                 </div>
                 <div>
                     <h3 class="text-purple-900">
-                        # Pending Tasks
+                        # Pending Tasks,
+                        <button
+                            @click=""
+                            class="bg-purple-900 text-white py-1 px-3 rounded-sm hover:text-purple-900 hover:bg-white">
+                            sort due priority
+                        </button>
                     </h3>
                     <div class="py-6">
                         <div v-for="ct in pending_tasks"
@@ -82,8 +88,8 @@ description">
                             </div>
                             <div>
                                 <span
-                                    class="inline-block bg-green-300 text-black rounded-l-full rounded-r-full px-3 py-1">
-                                    completed
+                                    class="inline-block bg-red-300 text-black rounded-l-full rounded-r-full px-3 py-1">
+                                    pending
                                 </span>
                                 <span
                                     class="inline-block bg-purple-900 text-white rounded-l-full rounded-r-full px-3 py-1">
@@ -98,7 +104,12 @@ description">
                 </div>
                 <div>
                     <h3 class="text-green-600">
-                        # Completed Tasks
+                        # Completed Tasks,
+                        <button
+                            @click=""
+                            class="bg-green-600 text-white py-1 px-3 rounded-sm hover:text-green-600 hover:bg-white">
+                            sort due priority
+                        </button>
                     </h3>
                     <div class="py-6">
                         <div v-for="ct in completed_tasks"
@@ -175,6 +186,10 @@ export default {
             required: true,
             type: Array
         },
+        csrf: {
+            required: true,
+            type: String
+        },
         board: {
             required: false,
             default() {
@@ -201,6 +216,18 @@ export default {
         }
     },
     methods: {
+        storeTaskRequest() {
+            axios.post('/task', {
+                csrf_token: this.csrf, title: this.title,
+                description: this.description, status: 'pending',
+                priority: this.priority, board_id: (this.board_id ? this.board_id : this.board.id)
+            })
+                .then(resp => this.pending_tasks.unshift(resp.data))
+                .catch(err => console.log(err));
+
+            this.current_task = this.title = this.description = "";
+            this.priority = "mid";
+        },
         get_pending_tasks() {
             return this.get_tasks_when_status_id('pending')
         },
@@ -226,12 +253,13 @@ export default {
     },
     watch: {
         current_task() {
+            if (!this.current_task)
+                return;
+
             let result = (this.current_task.match(/(.+)/gm));
 
             this.title = result[0];
             this.description = result[1] ?? '';
-
-            console.log(this.current_task.match(/(.+)/gm))
         }
     }
 }

@@ -14,7 +14,7 @@ class Board extends Model
 
     public function tasks()
     {
-        return $this->hasMany(Task::class);
+        return $this->hasMany(Task::class)->orderBy('updated_at', 'DESC');
     }
 
     public function user()

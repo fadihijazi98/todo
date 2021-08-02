@@ -39,7 +39,7 @@ class TaskController extends Controller
 
         $task = Task::create($validated);
 
-        return view('welcome', compact('task'));
+        return response()->json($task);
     }
 
     /**
