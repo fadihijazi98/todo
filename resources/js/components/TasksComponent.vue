@@ -59,11 +59,11 @@ description">
                 <div>
                     <h3 class="text-purple-900">
                         # Pending Tasks,
-                        <button
-                            @click=""
+                        <a
+                            href="?sort=true"
                             class="bg-purple-900 text-white py-1 px-3 rounded-sm hover:text-purple-900 hover:bg-white">
                             sort due priority
-                        </button>
+                        </a>
                     </h3>
                     <div class="py-6">
                         <div v-for="ct in pending_tasks"
@@ -110,7 +110,7 @@ description">
                     <h3 class="text-green-600">
                         # Completed Tasks,
                         <button
-                            @click=""
+                            href="?sort=true"
                             class="bg-green-600 text-white py-1 px-3 rounded-sm hover:text-green-600 hover:bg-white">
                             sort due priority
                         </button>

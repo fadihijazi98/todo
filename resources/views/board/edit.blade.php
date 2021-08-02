@@ -80,8 +80,11 @@
                 </form>
             </div>
             <div class="flex-1">
-                <tasks-component :tasks="{{$board->tasks}}" :board="{{$board}}" csrf="{{csrf_token()}}" />
+                <tasks-component :tasks="{{$tasks->values()->toJson()}}" :board="{{$board}}" csrf="{{csrf_token()}}" />
             </div>
+        </div>
+        <div>
+            {{ $tasks->links() }}
         </div>
     </div>
 @endsection

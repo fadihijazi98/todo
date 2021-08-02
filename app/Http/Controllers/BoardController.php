@@ -6,6 +6,7 @@ use App\Models\Board;
 use App\Models\Color;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class BoardController extends Controller
 {
@@ -55,10 +56,20 @@ class BoardController extends Controller
      */
     public function show(Board $board)
     {
+        $tasks = $board->tasks();
+
+        if (\request()->has('sort')) {
+            $this->trackPrioritySortRequest();
+
+            $tasks = $tasks->orderBy('priority', Session::get('sort_type'));
+        } else
+            $tasks = $tasks->orderBy('updated_at', 'DESC');
+
+        $tasks = $tasks->paginate(10);
         $path = "Board, Edit | Tasks";
         $colors = Color::all();
 
-        return view('board.edit', compact(['board', 'colors', 'path']));
+        return view('board.edit', compact(['board', 'colors', 'path', 'tasks']));
     }
 
     /**
@@ -137,4 +148,28 @@ class BoardController extends Controller
         return $board->user_id == Auth::id();
     }
 
+    private function trackPrioritySortRequest()
+    {
+        if (!Session::has('is_sort_asc'))
+            $this->setIsSortAscValue();
+
+        $this->invertAscSortFlag();
+
+        Session::put('sort_type', $this->getTypeOfSortDueSession());
+    }
+
+    private function setIsSortAscValue()
+    {
+        Session::put('is_sort_asc', false);
+    }
+
+    private function invertAscSortFlag()
+    {
+        Session::put('is_sort_asc', !Session::get('is_sort_asc'));
+    }
+
+    private function getTypeOfSortDueSession()
+    {
+        return Session::get('is_sort_asc') ? 'ASC' : 'DESC';
+    }
 }

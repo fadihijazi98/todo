@@ -42,11 +42,7 @@
                                        class="bg-purple-900 text-white px-3 py-2 rounded-md text-sm font-medium">Boards</a>
 
                                     <a href="#"
-                                       class="text-purple-300 hover:bg-purple-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Tasks</a>
-
-                                    <a href="#"
-                                       class="text-purple-300 hover:bg-purple-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Completed
-                                        tasks</a>
+                                       class="text-purple-300 hover:bg-purple-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Board - Tasks</a>
 
                                 </div>
                             </div>
@@ -126,11 +122,7 @@
                            class="bg-purple-900 text-white block px-3 py-2 rounded-md text-base font-medium">Boards</a>
 
                         <a href="#"
-                           class="text-purple-300 hover:bg-purple-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Tasks</a>
-
-                        <a href="#"
-                           class="text-purple-300 hover:bg-purple-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Completed
-                            tasks</a>
+                           class="text-purple-300 hover:bg-purple-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Board - Tasks</a>
 
                     </div>
                 @endauth
