@@ -27,5 +27,11 @@ Simple to-do application
 - CRUD Tasks
 - you can share your boards with others
 
+**this project use**
+- tailwindcss as a css framework
+- vue js as a front-end framework
+- PHP Laravel as  a back-end framework
+- ...
+
 **note: i used PHP unit test by Laravel to test CRUD for boards and tasks**
 
