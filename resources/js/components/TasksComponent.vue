@@ -68,6 +68,10 @@ description">
                     <div class="py-6">
                         <div v-for="ct in pending_tasks"
                              class="flex items-center justify-between gap-6 bg-white py-3 px-4 rounded-sm">
+                            <div>
+                                <input @click="mark_task_as_completed(ct)" type="checkbox" :key="ct.id"
+                                       class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"/>
+                            </div>
                             <div class="flex items-center gap-2">
                                 <span
                                     :class="`inline-block rounded-full w-4 h-4 ${ct.priority=='high'?'bg-red-600':ct.priority=='mid'?'bg-blue-600':'bg-yellow-600'}`">
@@ -97,7 +101,7 @@ description">
                                 </span>
                             </div>
                             <div class="text-gray-400">
-                                {{ ct.created_date }}
+                                {{ ct.updated_date }}
                             </div>
                         </div>
                     </div>
@@ -114,6 +118,11 @@ description">
                     <div class="py-6">
                         <div v-for="ct in completed_tasks"
                              class="flex items-center justify-between gap-6 bg-white py-3 px-4 rounded-sm">
+                            <div>
+                                <input @click="mark_task_as_pending(ct)" type="checkbox" checked :key="ct.id"
+                                       class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"/>
+                            </div>
+
                             <div class="flex items-center gap-2">
                                 <span
                                     :class="`inline-block rounded-full w-4 h-4 ${ct.priority=='high'?'bg-red-600':ct.priority=='mid'?'bg-blue-600':'bg-yellow-600'}`">
@@ -143,7 +152,7 @@ description">
                                 </span>
                             </div>
                             <div class="text-gray-400">
-                                {{ ct.created_date }}
+                                {{ ct.updated_date }}
                             </div>
                         </div>
                     </div>
@@ -227,6 +236,20 @@ export default {
 
             this.current_task = this.title = this.description = "";
             this.priority = "mid";
+        },
+        mark_task_as_completed(task) {
+            axios.put(`/task/${task.id}/completed`, {csrf_token: this.csrf})
+                .then(resp => {
+                    this.pending_tasks = this.pending_tasks.filter(item => item.id != task.id);
+                    this.completed_tasks.unshift(task);
+                }).catch(err => console.log(err));
+        },
+        mark_task_as_pending(task) {
+            axios.put(`/task/${task.id}/pending`, {csrf_token: this.csrf})
+                .then(resp => {
+                    this.pending_tasks.unshift(task);
+                    this.completed_tasks = this.completed_tasks.filter(item => item.id != task.id);
+                }).catch(err => console.log(err));
         },
         get_pending_tasks() {
             return this.get_tasks_when_status_id('pending')
