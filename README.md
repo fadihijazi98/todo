@@ -26,6 +26,10 @@ Simple to-do application
 - CRUD Boards
 - CRUD Tasks
 - you can share your boards with others
+- paginate data for more 10 items in collection
+- a user can search to his tasks or boards
+- a user can mark task as completed or get it back to pending
+- ..
 
 **this project use**
 - tailwindcss as a css framework
